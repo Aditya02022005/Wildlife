@@ -3,13 +3,14 @@ import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import SpeciesPage from './pages/SpeciesPage';
 import HabitatsPage from './pages/HabitatsPage';
-import './App.css'; // We will add some basic styling
+import './App.css';
 import SightingsPage from './pages/SightingsPage';
 
 function App() {
   return (
     <Router>
-      <div className="App">
+      {/* 👇 THIS is the line to change 👇 */}
+      <div className="app-layout">
         <nav className="navbar">
           <h1><Link to="/">Wildlife Conservation Tracker</Link></h1>
         </nav>
