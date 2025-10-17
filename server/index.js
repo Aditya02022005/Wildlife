@@ -4,13 +4,15 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // --- ADD THIS --- Middleware to parse JSON request bodies
+app.use(express.json());
 
+// 👇 REPLACE THIS ENTIRE BLOCK 👇
 const db = mysql.createConnection({
-    host: 'localhost',      
-    user: 'root',           
-    password: 'root', 
-    database: 'wildlife_db' 
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT
 });
 
 db.connect((err) => {
@@ -18,7 +20,7 @@ db.connect((err) => {
         console.error('Error connecting to the database:', err);
         return;
     }
-    console.log('Successfully connected to the wildlife_db database.');
+    console.log('Successfully connected to the Railway database.');
 });
 
 // --- GET Routes (to read data) ---
@@ -53,20 +55,16 @@ app.get('/api/sightings', (req, res) => {
 });
 
 // --- PUT Route (to update data) ---
-// --- ADD THIS ENTIRE BLOCK ---
 app.put('/api/species/:id', (req, res) => {
-    // Get the ID from the URL and the updated data from the request body
     const { id } = req.params;
     const { common_name, scientific_name, conservation_status } = req.body;
 
-    // The SQL query with placeholders (?) to prevent SQL injection
     const sql = `
         UPDATE Species 
         SET common_name = ?, scientific_name = ?, conservation_status = ? 
         WHERE species_id = ?
     `;
 
-    // Execute the query with the updated data
     db.query(sql, [common_name, scientific_name, conservation_status, id], (err, result) => {
         if (err) {
             console.error("Error updating species:", err);
@@ -76,7 +74,6 @@ app.put('/api/species/:id', (req, res) => {
     });
 });
 
-// ADD THIS: Endpoint to update a habitat record
 app.put('/api/habitats/:id', (req, res) => {
     const { id } = req.params;
     const { habitat_name, location_description } = req.body;
@@ -96,8 +93,7 @@ app.put('/api/habitats/:id', (req, res) => {
     });
 });
 
-// --- ADD THIS ENTIRE BLOCK ---
-// Endpoint to add (create) a new species
+// --- POST Route (to add data) ---
 app.post('/api/species', (req, res) => {
     const { common_name, scientific_name, conservation_status } = req.body;
 
@@ -108,7 +104,6 @@ app.post('/api/species', (req, res) => {
             console.error("Error adding species:", err);
             return res.status(500).send("Error adding data.");
         }
-        // Send back the newly created species object for easy front-end update
         res.status(201).json({
             species_id: result.insertId,
             common_name,
@@ -118,8 +113,7 @@ app.post('/api/species', (req, res) => {
     });
 });
 
-// --- ADD THIS ENTIRE BLOCK ---
-// Endpoint to delete a species
+// --- DELETE Route ---
 app.delete('/api/species/:id', (req, res) => {
     const { id } = req.params;
     const sql = `DELETE FROM Species WHERE species_id = ?`;
@@ -129,7 +123,6 @@ app.delete('/api/species/:id', (req, res) => {
             console.error("Error deleting species:", err);
             return res.status(500).send("Error deleting data.");
         }
-        // Check if any row was actually deleted
         if (result.affectedRows === 0) {
             return res.status(404).send("Species not found.");
         }
@@ -137,7 +130,7 @@ app.delete('/api/species/:id', (req, res) => {
     });
 });
 
-const PORT = 5000;
+const PORT = process.env.PORT || 5000; // Use Railway's port if available
 app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+    console.log(`Server is running on port ${PORT}`);
 });
