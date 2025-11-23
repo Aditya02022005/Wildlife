@@ -1,0 +1,441 @@
+/* ===== General & Body Styling ===== */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background-color: rgb(61, 61, 61); /* Light gray background */
+  color: #1a202c;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Stylish Navbar ===== */
+.navbar {
+  background: rgba(255, 255, 255, 0.15);  /* transparent white */
+  backdrop-filter: blur(12px);           /* strong blur effect */
+  -webkit-backdrop-filter: blur(12px);   /* safari support */
+  
+  padding: 1.5rem 2rem;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 20;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: none;
+  text-align: center;
+}
+
+
+.navbar h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+}
+/* ===== Foundational Styles for Full Height ===== */
+html, body, #root {
+  height: 100%;
+  margin: 0;
+}
+
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+main {
+  flex-grow: 1; /* This is the key: makes the main content area expand */
+  display: flex;
+  flex-direction: column;
+}
+.navbar h1 a {
+  text-decoration: none;
+  background: linear-gradient(45deg, #4F46E5, #9333EA);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  transition: opacity 0.3s ease;
+}
+
+.navbar h1 a:hover {
+  opacity: 0.8;
+}
+
+/* ===== Homepage Title & Container ===== */
+.home-container {
+  max-width: 1200px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+  text-align: center;
+}
+
+.home-container h2 {
+  font-size: 3.5rem;
+  color: #1e293b;
+  margin-bottom: 2rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+/* ===== Homepage Card Grid ===== */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.card {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 2.5rem;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 8px 16px rgba(17, 24, 39, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid #e5e7eb;
+  text-align: left;
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 16px 32px rgba(17, 24, 39, 0.1);
+}
+
+.card h3 {
+  color: #111827;
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+}
+
+.card p {
+  color: #4b5563;
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+/* ===== Modern Table Redesign ===== */
+table {
+  width: 100%;
+  margin: 2.5rem auto;
+  border-collapse: collapse;
+  font-size: 1rem;
+}
+
+thead th {
+  background-color: #f9fafb;
+  padding: 1rem 1.5rem;
+  text-align: left;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #e5e7eb;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+  transition: background-color 0.2s ease;
+}
+
+tbody tr:last-child {
+  border-bottom: none;
+}
+
+tbody td {
+  padding: 1.25rem 1.5rem;
+  color: #4b5563;
+  background-color: #ffffff;
+}
+
+tbody tr:hover td {
+  background-color: #f9fafb;
+}
+
+tbody button {
+  background-color: #4F46E5;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+tbody button:hover {
+  background-color: #4338CA;
+}
+
+
+/* ===== Polished & Animated Modal ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(17, 24, 39, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+}
+
+.modal-content {
+  background-color: white;
+  padding: 2.5rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  /* Animation */
+  animation: fadeInScale 0.3s ease-out;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modal-content h2 {
+  margin-top: 0;
+  color: #111827;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.modal-content label {
+  font-weight: 600;
+  color: #374151;
+}
+
+.modal-content input {
+  padding: 0.8rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.modal-content input:focus {
+  outline: none;
+  border-color: #4F46E5;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.3);
+}
+
+.modal-content .button-group {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+}
+
+.modal-content button {
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+}
+
+.modal-content button[type="submit"] {
+  background-color: #4F46E5;
+  color: white;
+  flex-grow: 1; /* Makes button take available space */
+}
+
+.modal-content button[type="submit"]:hover {
+  background-color: #4338CA;
+}
+
+.modal-content button[type="button"] {
+  background-color: #e5e7eb;
+  color: #374151;
+}
+
+.modal-content button[type="button"]:hover {
+  background-color: #d1d5db;
+}
+
+/* --- Styles for Page Action Buttons --- */
+.page-actions {
+  width: 100%;
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.add-button {
+  background-color: #10B981; /* A nice green color */
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.add-button:hover {
+  background-color: #059669; /* Darker green on hover */
+  transform: translateY(-2px);
+}
+
+
+
+/* --- Styles for Action Button Group --- */
+.action-buttons {
+  display: flex;
+  gap: 0.5rem; /* Adds space between buttons */
+}
+
+/* --- Style for the Delete Button --- */
+.delete-button {
+  background-color: #FEE2E2; /* Light red background */
+  color: #EF4444; /* Darker red text */
+  border: 1px solid #FCA5A5;
+}
+
+.delete-button:hover {
+  background-color: #FECACA;
+  color: #DC2626;
+}
+
+.fullscreen-hero.with-bg {
+ 
+  width: 100vw;
+  height: 100vh; 
+  margin: 0;
+  padding: 0;
+
+  background-image: url('./assets/wildlife-bg.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.fullscreen-hero {
+  width: 100vw;
+  height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* This creates a semi-transparent dark overlay for text readability */
+.home-container.with-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(17, 24, 39, 0.7); /* Dark overlay */
+  z-index: 1;
+}
+
+/* This container holds the actual content (title, cards) */
+.content-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Style the title to be white and large */
+.content-overlay h2 {
+  font-size: 3.5rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Style the new subtitle */
+.content-overlay .subtitle {
+  font-size: 1.25rem;
+  color: #e5e7eb; /* Light gray */
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Adjust card background for better contrast on the image */
+.with-bg .card {
+  background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+  backdrop-filter: blur(5px);
+}
+/* This creates a semi-transparent dark overlay for text readability */
+.home-container.with-bg::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(17, 24, 39, 0.7); /* Dark overlay */
+  z-index: 1;
+}
+
+/* This container holds the actual content (title, cards) */
+.content-overlay {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  max-width: 1200px;
+  width: 100%;
+}
+
+/* Style the title to be white and large */
+.content-overlay h2 {
+  font-size: 3.5rem;
+  color: #ffffff;
+  font-weight: 700;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+/* Style the new subtitle */
+.content-overlay .subtitle {
+  font-size: 1.25rem;
+  color: #e5e7eb; /* Light gray */
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Adjust card background for better contrast on the image */
+.with-bg .card {
+  background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
+  backdrop-filter: blur(5px);
+}
