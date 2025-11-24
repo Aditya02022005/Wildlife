@@ -2,11 +2,13 @@
 body {
   font-family: 'Poppins', sans-serif;
   margin: 0;
-  background-color: rgb(61, 61, 61); /* Light gray background */
+  background-color: transparent !important;
+
   color: #1a202c;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 
 /* ===== Stylish Navbar ===== */
 .navbar {
@@ -24,6 +26,38 @@ body {
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   box-shadow: none;
   text-align: center;
+}
+
+.page-bg {
+  min-height: 100vh;
+  width: 100%;
+
+  background-image: url('./assets/3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  padding: 2rem;
+  position: relative;
+}
+
+.page-bg::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background-color: rgba(17, 24, 39, 0.6);
+  backdrop-filter: blur(2px);
+
+  z-index: 1;
+}
+
+.page-bg > * {
+  position: relative;
+  z-index: 2;
 }
 
 
@@ -438,4 +472,39 @@ tbody button:hover {
 .with-bg .card {
   background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white */
   backdrop-filter: blur(5px);
+}
+
+/* OVERRIDE ALL GREY BACKGROUNDS */
+html, body, #root, .app-layout, main {
+  background: transparent !important;
+}
+/* Make the inner content transparent */
+.content-container {
+  background: transparent !important;
+}
+
+/* Make table background slightly see-through */
+/* TABLE BACKGROUND (Glass effect but not too transparent) */
+table {
+  background: rgba(255, 255, 255, 0.35) !important;
+  backdrop-filter: blur(8px);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+/* HEADER – slightly stronger */
+thead th {
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(10px);
+  font-weight: 700;
+}
+
+/* ROWS */
+tbody td {
+  background: rgba(255, 255, 255, 0.25) !important;
+}
+
+/* HOVER ROW */
+tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.35) !important;
 }

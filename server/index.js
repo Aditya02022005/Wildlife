@@ -88,6 +88,72 @@ app.put('/api/habitats/:id', (req, res) => {
     });
 });
 
+app.post('/api/habitats', (req, res) => {
+    const { habitat_name, location_description } = req.body;
+
+    const sql = `INSERT INTO Habitats (habitat_name, location_description) VALUES (?, ?)`;
+
+    db.query(sql, [habitat_name, location_description], (err, result) => {
+        if (err) {
+            console.error("Error adding habitat:", err);
+            return res.status(500).send("Error adding habitat.");
+        }
+
+        res.status(201).json({
+            habitat_id: result.insertId,
+            habitat_name,
+            location_description
+        });
+    });
+});
+
+app.delete('/api/habitats/:id', (req, res) => {
+    const { id } = req.params;
+
+    db.beginTransaction(err => {
+        if (err) return res.status(500).send("Error starting transaction.");
+
+        // First delete related sightings
+        const deleteSightingsSql = `DELETE FROM Sightings WHERE habitat_id = ?`;
+
+        db.query(deleteSightingsSql, [id], (err) => {
+            if (err) {
+                db.rollback(() => {
+                    console.error("Error deleting related sightings:", err);
+                    return res.status(500).send("Error deleting related sightings.");
+                });
+                return;
+            }
+
+            // Now delete the habitat
+            const deleteHabitatSql = `DELETE FROM Habitats WHERE habitat_id = ?`;
+
+            db.query(deleteHabitatSql, [id], (err, result) => {
+                if (err) {
+                    db.rollback(() => {
+                        console.error("Error deleting habitat:", err);
+                        return res.status(500).send("Error deleting habitat.");
+                    });
+                    return;
+                }
+
+                db.commit(err => {
+                    if (err) {
+                        db.rollback(() => res.status(500).send("Commit failed."));
+                        return;
+                    }
+
+                    if (result.affectedRows === 0) {
+                        return res.status(404).send("Habitat not found.");
+                    }
+
+                    res.status(200).send("Habitat and related sightings deleted successfully.");
+                });
+            });
+        });
+    });
+});
+
 app.post('/api/species', (req, res) => {
     const { common_name, scientific_name, conservation_status } = req.body;
 

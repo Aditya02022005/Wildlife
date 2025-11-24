@@ -10,15 +10,22 @@ function SightingsPage() {
       .catch(error => console.error("Error fetching sightings:", error));
   }, []);
 
-  // Function to format the date nicely
   const formatDate = (dateString) => {
-    const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
+    const options = { 
+      year: 'numeric', 
+      month: 'long', 
+      day: 'numeric', 
+      hour: '2-digit', 
+      minute: '2-digit' 
+    };
     return new Date(dateString).toLocaleDateString(undefined, options);
-  }
+  };
 
   return (
-    <div>
+    <div className="page-bg">
+       <div className="content-container">
       <h1>Sightings Log</h1>
+
       <table>
         <thead>
           <tr>
@@ -28,6 +35,7 @@ function SightingsPage() {
             <th>Number Seen</th>
           </tr>
         </thead>
+
         <tbody>
           {sightings.map(s => (
             <tr key={s.sighting_id}>
@@ -39,6 +47,7 @@ function SightingsPage() {
           ))}
         </tbody>
       </table>
+    </div>
     </div>
   );
 }

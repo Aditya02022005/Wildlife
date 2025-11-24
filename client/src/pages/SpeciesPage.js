@@ -94,7 +94,7 @@ function SpeciesPage() {
   };
 
   return (
-    <div>
+    <div className='page-bg'>
       <h1>Species List</h1>
       <div className="page-actions">
         <button className="add-button" onClick={handleOpenAddModal}>+ Add New Species</button>
